@@ -1,0 +1,19 @@
+# SO
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Claude Code (configuração local)
+.claude/settings.local.json
+
+# Temporários
+*.tmp
+*~
+
+# Histórico local do aseprite-live, se ele gravar dentro da pasta.
+# Confira onde ele guarda as versões e ajuste esta linha.
+.aseprite-live/

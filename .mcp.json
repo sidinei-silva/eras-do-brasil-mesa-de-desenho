@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "aseprite": {
+      "type": "stdio",
+      "command": "/home/sidinei/meus_projetos/dev/pessoal/aseprite-live/aseprite-live",
+      "args": [
+        "proxy",
+        "--",
+        "uv",
+        "--directory",
+        "/home/sidinei/meus_projetos/dev/pessoal/aseprite-mcp",
+        "run",
+        "-m",
+        "aseprite_mcp"
+      ],
+      "env": {}
+    }
+  }
+}
