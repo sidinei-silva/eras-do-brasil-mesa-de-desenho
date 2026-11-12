@@ -1,0 +1,40 @@
+GIMP Palette
+Name: Eras 36 (P1)
+Columns: 0
+#
+ 26  21  21	Contorno #1A1515
+ 42  24  20	Pele escura #2A1814
+ 90  52  38	Pele escura/media #5A3426
+140  82  54	Pele escura #8C5236
+168 104  63	Pele media/clara #A8683F
+211 154 108	Pele media #D39A6C
+227 178 136	Pele clara #E3B288
+244 211 174	Pele clara #F4D3AE
+ 14  33  37	Mata #0E2125
+ 34  60  52	Mata #223C34
+ 61 122  60	Mata #3D7A3C
+134 176  79	Mata #86B04F
+ 61  38  28	Terra e madeira #3D261C
+124  90  58	Terra e madeira #7C5A3A
+168 112  62	Terra e madeira/Entardecer #A8703E
+184 153 118	Terra e madeira #B89976
+216 182 122	Palha e dourado velho #D8B67A
+240 226 182	Palha e dourado velho #F0E2B6
+ 38  38  47	Pedra #26262F
+ 75  74  85	Pedra #4B4A55
+123 120 128	Pedra #7B7880
+179 172 162	Pedra #B3ACA2
+ 14  34  54	Agua #0E2236
+ 27  74 104	Agua/Entardecer #1B4A68
+ 46 127 142	Agua #2E7F8E
+120 194 184	Agua #78C2B8
+ 58  65  80	Metal #3A4150
+127 136 150	Metal #7F8896
+218 221 214	Metal #DADDD6
+ 44  24  64	Rasgo (Raiz) #2C1840
+110  44 148	Rasgo (Raiz) #6E2C94
+192 112 240	Rasgo (Raiz) #C070F0
+110  28  34	Estado de UI #6E1C22
+201  64  46	Estado de UI #C9402E
+242 193  78	Estado de UI #F2C14E
+126  87  94	Entardecer #7E575E
