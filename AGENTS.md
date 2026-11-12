@@ -5,7 +5,7 @@ Repositório de arte do Eras do Brasil. Regras para qualquer IA aqui.
 ## Antes de tudo
 
 - A direção de arte é `../eras-do-brasil/docs/direcao-de-arte.md`. Leia antes de qualquer desenho. Se não achar, pare e pergunte.
-- Use só as cores da paleta P1 da direção de arte. O arquivo `palettes/eras-35.gpl` deve ter essas mesmas cores; se ele não existir ou estiver diferente da P1, avise antes de desenhar. Cor fora da paleta: pergunte antes.
+- Use só as cores da paleta P1 da direção de arte. O arquivo `palettes/eras-36.gpl` deve ter essas mesmas cores; se ele não existir ou estiver diferente da P1, avise antes de desenhar. Cor fora da paleta: pergunte antes.
 - **Nenhuma IA roda `git add`, `git commit` ou `git push`.** Quem commita sou eu.
 
 ## Autoria (decidir: A, B ou C)
@@ -43,6 +43,7 @@ Repositório de arte do Eras do Brasil. Regras para qualquer IA aqui.
 - Contorno preto (`#1A1515`) em boneco e item; cenário sem contorno.
 - Tier muda cor e acabamento, nunca tamanho nem silhueta.
 - Referências: Calamity para mundo e câmera; Mana Seed para o boneco (escala, camadas e troca de paleta).
+- Cada slot (pele, roupa, cabelo, armadura, arma) usa cores só dele, sem dividir tom com outro slot, para a troca de paleta funcionar.
 
 ## Commits
 
