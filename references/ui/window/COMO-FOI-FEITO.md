@@ -86,38 +86,59 @@ Ordem das camadas no arquivo, de baixo para cima.
 
 ## Prévia (montagem da cena)
 
-Duas versões, ambas 176×200 e também em ×3. As peças são as mesmas; só muda o miolo do painel:
+Duas versões, ambas 176×212 e também em ×3. As peças são as mesmas; só muda o miolo do painel:
 
 - `ui_window_mock_ref`: miolo `#26262F`.
 - `ui_window_mock_warm_ref`: miolo `#1A1515` (a faixa de estado continua com o miolo `#26262F` dela, porque é a peça).
 
 Foi montada esticando os PNG exportados com os cortes acima, como o motor faria. A camada `guia_texto` (contorno
-`#C070F0` de 1 px, visível) marca onde entra o texto.
+`#C070F0` de 1 px, visível) marca a caixa de 12 px das linhas da arma e do resultado. A camada `texto_amostra` traz
+textos de exemplo na fonte real, só para revisão (no jogo, todo texto é fonte).
+
+### Fonte
+
+**monogram extended**, tamanho 16 (`eras-do-brasil/client/assets/fonts/monogram-extended.ttf`), cor `#F0E2B6`.
+
+- Letra com ~6 px de avanço; maiúscula com 7 px; descendente de 2 px; acento ocupa até 2 px acima da maiúscula.
+- Linha de texto (Label) com **12 px** de altura. Dentro dela: maiúscula nas linhas 3–9, linha de base na 10.
+- "Teste de Coleta" (o título mais longo previsto) mede **89 px** de tinta.
+- Largura útil em caracteres: arma 76 px ≈ 12; resultado 80 px ≈ 13; faixa 118 px ≈ 19.
 
 **Regra de espaçamento:** 4 px entre cada bloco e 4 px entre o primeiro e o último bloco e a borda interna do painel.
-Área útil do painel (dentro das bordas de 8 px): x 16–159, y 30–170 (144×141).
+A linha da arma conta como um bloco de 16 px (a altura do ícone), com o texto de 12 px centrado nela.
+Área útil do painel (dentro das bordas de 8 px): x 16–159, y 30–182 (144×153).
 
 Coordenadas em px da prévia, origem no canto de cima à esquerda (x, y = canto de cima à esquerda do bloco). Para usar
 como filho do painel na Godot, subtraia a origem do painel: **x − 8, y − 22**.
 
 | # | Bloco | Peça / nó | x | y | Larg. | Alt. | Obs. |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| — | painel | `panel_9slice` (NinePatchRect, bordas 8/8/8/8) | 8 | 22 | 160 | 157 | era 160×122: **+35 de altura** |
+| — | painel | `panel_9slice` (NinePatchRect, bordas 8/8/8/8) | 8 | 22 | 160 | 169 | era 160×157: **+12 de altura**, largura igual |
 | — | ornamento | `ornament_top` | 72 | 0 | 32 | 16 | atrás da placa; as 2 linhas de baixo ficam cobertas |
-| 1 | placa do título | `title_plate_3slice` (bordas 8/0/8/0) | 48 | 14 | 80 | 16 | texto do título na tábua escura: x 52–123, y 19–25 (7 px) |
-| — | cantos | `ornament_corner` | 8 / 152 | 22 / 163 | 16 | 16 | TR espelhado em H, BL em V, BR nos dois |
-| 2 | ícone da arma | `icon_sword` | 40 | 30 | 16 | 16 | centrado na linha arma; passa 4 px acima e abaixo dela |
-| 2 | **texto arma** | Label | 60 | 34 | 76 | 8 | 4 px depois do ícone; grupo ícone+texto (x 40–135) centrado |
-| 3 | d20 | `ui_d20_v2_ref` (tela 64×64) | 56 | 38 | 64 | 64 | dado visível: x 64, y 46, 48×48 |
-| 4 | **texto resultado** | Label | 48 | 98 | 80 | 8 | centrado |
-| 5 | divisória | `divider_3slice` (5 partes) | 24 | 110 | 128 | 5 | trechos esticados de 60 px cada; losango em x 85–90 |
-| 6 | dano 1 | quadrado vazio | 32 | 119 | 32 | 32 | marcação `#4B4A55`, não é peça |
-| 6 | dano 2 | quadrado vazio | 72 | 119 | 32 | 32 | 8 px entre quadrados |
-| 6 | dano 3 | quadrado vazio | 112 | 119 | 32 | 32 | |
-| 7 | faixa de estado | `status_bar_3slice` (bordas 8/0/8/0) | 24 | 155 | 128 | 12 | texto: x 29–146, y 158–163 (6 px) |
-| — | botão | `button_3slice` (bordas 8/0/8/0) | 56 | 183 | 64 | 14 | fora do painel, 4 px abaixo dele |
+| 1 | placa do título | `title_plate_3slice` (bordas 8/0/8/0) | 35 | 14 | 105 | 16 | era 80: **+25**; 89 do texto + 8 de cada lado |
+| 1 | **texto título** | Label | 43 | 16 | 89 | 12 | maiúscula em y 19–25, na tábua escura |
+| — | cantos | `ornament_corner` | 8 / 152 | 22 / 175 | 16 | 16 | TR espelhado em H, BL em V, BR nos dois |
+| 2 | ícone da arma | `icon_sword` | 40 | 34 | 16 | 16 | define a altura do bloco 2 |
+| 2 | **texto arma** | Label | 60 | 36 | 76 | 12 | 4 px depois do ícone; grupo ícone+texto (x 40–135) centrado |
+| 3 | d20 | `ui_d20_v2_ref` (tela 64×64) | 56 | 46 | 64 | 64 | dado visível: x 64, y 54, 48×48 |
+| 4 | **texto resultado** | Label | 48 | 106 | 80 | 12 | centrado |
+| 5 | divisória | `divider_3slice` (5 partes) | 24 | 122 | 128 | 5 | trechos esticados de 60 px cada; losango em x 85–90 |
+| 6 | dano 1 | quadrado vazio | 32 | 131 | 32 | 32 | marcação `#4B4A55`, não é peça |
+| 6 | dano 2 | quadrado vazio | 72 | 131 | 32 | 32 | 8 px entre quadrados |
+| 6 | dano 3 | quadrado vazio | 112 | 131 | 32 | 32 | |
+| 7 | faixa de estado | `status_bar_3slice` (bordas 8/0/8/0) | 24 | 167 | 128 | 12 | — |
+| 7 | **texto faixa** | Label | 29 | 167 | 118 | 12 | mesma altura da faixa; maiúscula em y 170–176 (ver abaixo) |
+| — | botão | `button_3slice` (bordas 8/0/8/0) | 56 | 195 | 64 | 14 | fora do painel, 4 px abaixo dele |
 
-Vertical, de cima para baixo: borda interna 29 → 4 → arma 34–41 → 4 → d20 46–93 → 4 → resultado 98–105 → 4 →
-divisória 110–114 → 4 → dano 119–150 → 4 → faixa 155–166 → 4 → borda interna 171.
+Vertical, de cima para baixo: borda interna 29 → 4 → arma 34–49 → 4 → d20 54–101 → 4 → resultado 106–117 → 4 →
+divisória 122–126 → 4 → dano 131–162 → 4 → faixa 167–178 → 4 → borda interna 183.
+
+De onde vêm os +12 de altura: +4 da linha do resultado (8 → 12), +4 da linha da arma (8 → 12) e +4 porque o ícone de
+16 px agora conta como o bloco (antes ele encostava na borda interna, sem os 4 px).
+
+**Atenção, faixa de estado:** a área de texto da peça tem 6 px (y 3–8) e a maiúscula da fonte tem 7. A linha de baixo
+da letra cai sobre a régua de baixo da faixa (y 176). Acento (Ã, É) sobe 2 px e encosta na régua de cima. Sem mexer na
+peça não cabe (até minúscula com haste, como `l` e `d`, tem 7 px); a faixa precisa de uma área de texto de 9 px para
+caber maiúscula com acento (peça de 15 px).
 
 `ui_window_kit_sheet_ref_x6.png` mostra todas as peças lado a lado, sobre fundo `#7B7880` só para a revisão.
