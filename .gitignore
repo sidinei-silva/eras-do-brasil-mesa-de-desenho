@@ -17,3 +17,6 @@ Thumbs.db
 # Histórico local do aseprite-live, se ele gravar dentro da pasta.
 # Confira onde ele guarda as versões e ajuste esta linha.
 .aseprite-live/
+
+# Dump de crash
+core.*
