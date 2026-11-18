@@ -16,9 +16,9 @@ L, B, R, T no Inspector).
 | --- | --- | --- | --- | --- |
 | `panel_9slice` | 32×32 | 8, 8, 8, 8 | miolo 16×16 em (8,8); bordas nos 2 eixos | slice `panel` com centro em (8,8,16,16) |
 | `title_plate_3slice` | 48×16 | 8, 0, 8, 0 | só na horizontal, colunas 8–39 | altura fixa de 16 |
-| `status_bar_3slice` | 48×12 | 8, 0, 8, 0 | só na horizontal, colunas 8–39 | área de texto: y 3–8 (6 px), entre x 5 e 42 |
+| `status_bar_3slice` | 48×16 | 8, 0, 8, 0 | só na horizontal, colunas 8–39 | área de texto: y 2–13 (12 px), entre x 5 e 42 |
 | `divider_3slice` | 32×5 | ver abaixo | **as pontas**, não o centro | 5 partes |
-| `button_3slice` | 48×14 ×3 quadros | 8, 0, 8, 0 | só na horizontal, colunas 8–39 | quadros na folha: x 0 / 48 / 96 |
+| `button_3slice` | 48×16 ×3 quadros | 8, 0, 8, 0 | só na horizontal, colunas 8–39 | quadros na folha: x 0 / 48 / 96; área de texto de 12 px (ver abaixo) |
 | `ornament_top` | 32×16 | — | não estica | fica sobre a placa |
 | `ornament_corner` | 16×16 | — | não estica | o motor espelha para os outros cantos |
 | `icon_sword` | 16×16 | — | não estica | — |
@@ -38,8 +38,9 @@ No Godot isso vira 3 nós (2 `NinePatchRect` + 1 `TextureRect`); no Unity, 2 spr
 então desenhe a linha como 3-slice simples (1, 0, 1, 0) e ponha o losango por cima, centrado.
 
 **Botão:** `idle` = quadro 1, `hover` = 2, `pressed` = 3 (tags no `.aseprite`; `ui_window_button_3slice_ref.json` traz
-os retângulos e as tags). O texto sobe e desce junto: no `idle` e no `hover` a face vai de y 2 a 9; no `pressed`, de y 3 a 10.
-O motor desce o rótulo 1 px no `pressed`.
+os retângulos e as tags). Área de texto de 12 px: no `idle` e no `hover`, y 1–12 (aro de 1 px em y 1 + face de 11 px em
+y 2–12); no `pressed`, y 2–13. A linha 0 do Label da monogram não tem tinta, então ela cai no aro sem problema: acento
+fica na face, maiúscula em y 4–10 e descendente até y 12 (no `idle`). O motor desce o rótulo 1 px no `pressed`.
 
 ## Como manter as bordas esticáveis
 
@@ -66,14 +67,20 @@ Ordem das camadas no arquivo, de baixo para cima.
 2. **title_plate_3slice** — `madeira` → `dourado` → `contorno` → `guia`. Moldura dourada de 2 px, contorno interno e
    tábua escura `#3D261C` para o título claro (`#F0E2B6`) ler bem. Pontas com cantos cortados, faixa dourada vertical
    (clara à esquerda, `#7C5A3A` à direita) e um cravo 2×2.
-3. **status_bar_3slice** — `miolo` → `madeira` → `dourado` → `contorno` → `guia`. Faixa de miolo de 6 px entre 2
-   réguas de madeira; pontas em bico, com tampa dourada.
+3. **status_bar_3slice** — `miolo` → `madeira` → `dourado` → `contorno` → `guia`. Faixa de miolo de 12 px (y 2–13)
+   entre 2 réguas de madeira (`#7C5A3A` em cima, `#3D261C` embaixo), encostadas direto no miolo, sem contorno interno;
+   pontas em bico de 8 px, com tampa dourada.
+   Perfil vertical de cima para baixo: `K C M×12 F K` (K contorno, C/F madeira, M miolo).
 4. **divider_3slice** — `madeira` → `dourado` → `contorno` → `guia`. Linha dourada de 1 px com contorno e um losango
    de 6×5 no centro.
 5. **button_3slice** — `madeira` → `dourado` → `contorno` → `guia`; 3 quadros.
-   - `idle`: aro dourado em cima e à esquerda, face `#7C5A3A`, sombra de 1 px à direita, base `#3D261C` de 2 px.
+   Perfil vertical do `idle`, de cima para baixo: `K aro face×11 base×2 K` (16 px). A base encosta direto na face,
+   sem contorno entre as duas.
+   - `idle`: aro dourado em cima e à esquerda, face `#7C5A3A` (y 2–12), sombra de 1 px à direita, base `#3D261C` de 2 px
+     (y 13–14). Cravos 2×2 em y 6–7.
    - `hover`: um tom acima em tudo (face `#A8703E`, aro `#F0E2B6`, sombra `#7C5A3A`).
-   - `pressed`: tudo 1 px abaixo, face `#3D261C`, aro `#7C5A3A`, base de 1 px. A borda de baixo não se mexe.
+   - `pressed`: tudo 1 px abaixo (linha 0 vazia), face `#3D261C` (y 3–13), aro `#7C5A3A`, base de 1 px (y 14), cravos
+     em y 7–8. A borda de baixo não se mexe. A base é da mesma cor da face, então funde com ela.
    *À mão:* desenhe o `idle`, **Alt+D** para duplicar e use **Shift+R** (trocar cor) para o `hover`. Para o
    `pressed`, duplique, selecione tudo acima da base e mova 1 px para baixo com a seta.
 6. **ornament_top** — `folhas` → `dourado` → `contorno`. Meio sol nascendo de trás da placa (as 2 linhas de baixo
@@ -136,9 +143,9 @@ divisória 122–126 → 4 → dano 131–162 → 4 → faixa 167–178 → 4 �
 De onde vêm os +12 de altura: +4 da linha do resultado (8 → 12), +4 da linha da arma (8 → 12) e +4 porque o ícone de
 16 px agora conta como o bloco (antes ele encostava na borda interna, sem os 4 px).
 
-**Atenção, faixa de estado:** a área de texto da peça tem 6 px (y 3–8) e a maiúscula da fonte tem 7. A linha de baixo
-da letra cai sobre a régua de baixo da faixa (y 176). Acento (Ã, É) sobe 2 px e encosta na régua de cima. Sem mexer na
-peça não cabe (até minúscula com haste, como `l` e `d`, tem 7 px); a faixa precisa de uma área de texto de 9 px para
-caber maiúscula com acento (peça de 15 px).
+**Atenção, prévia desatualizada:** a montagem acima (e `ui_window_kit_sheet_ref_x6.png`) ainda usa a faixa de 48×12 e
+o botão de 48×14. As peças agora têm 16 px de altura, com área de texto de 12 px, e o Label inteiro (acento,
+maiúscula e descendente) cabe dentro delas. Para remontar: a faixa ganha +4 de altura (o painel cresce 4 px) e o botão
++2.
 
 `ui_window_kit_sheet_ref_x6.png` mostra todas as peças lado a lado, sobre fundo `#7B7880` só para a revisão.
